@@ -1,4 +1,7 @@
 ### General ###
+
+backend/application/syson-frontend/src/main/resources/static
+
 .~lock*#
 yalc.lock
 .yalc
