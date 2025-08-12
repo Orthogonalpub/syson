@@ -11,14 +11,8 @@
  *     Obeo - initial API and implementation
  *******************************************************************************/
 import { NavigationBarIconProps } from '@eclipse-sirius/sirius-web-application';
-import IconButton from '@mui/material/IconButton';
-import Link from '@mui/material/Link';
 import { emphasize, Theme } from '@mui/material/styles';
-import Tooltip from '@mui/material/Tooltip';
-import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from 'tss-react/mui';
-
-import { SysONIcon } from './../core/SysONIcon';
 
 export const useNavigationBarIconStyles = makeStyles()((theme: Theme) => ({
   link: {
@@ -34,14 +28,14 @@ export const useNavigationBarIconStyles = makeStyles()((theme: Theme) => ({
 }));
 
 export const SysONNavigationBarIcon = ({}: NavigationBarIconProps) => {
-  const { classes } = useNavigationBarIconStyles();
-  return (
-    <Tooltip title="Back to the homepage">
-      <Link component={RouterLink} to="/" className={classes.link} color="inherit">
-        <IconButton className={classes.onDarkBackground} color="inherit">
-          <SysONIcon />
-        </IconButton>
-      </Link>
-    </Tooltip>
-  );
+  return <div />;
+  // return (
+  //   <Tooltip title="Back 333">
+  //     <Link component={RouterLink} to="/" className={classes.link} color="inherit">
+  //       <IconButton className={classes.onDarkBackground} color="inherit">
+  //         <SysONIcon />
+  //       </IconButton>
+  //     </Link>
+  //   </Tooltip>
+  // );
 };
