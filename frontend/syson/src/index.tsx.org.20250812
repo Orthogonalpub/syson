@@ -56,19 +56,22 @@ import {
   SysMLViewFrameNodeConverter,
   SysMLViewFrameNodeLayoutHandler,
   SysONDiagramPanelMenu,
+  SysONDocumentTreeItemContextMenuContribution,
+  SysONExtensionRegistryMergeStrategy,
+  SysONNavigationBarMenuIcon,
+  SysONObjectTreeItemContextMenuContribution,
 } from '@eclipse-syson/syson-components';
 import { createRoot } from 'react-dom/client';
+
 import { httpOrigin, wsOrigin } from './core/URL';
-import { SysONDocumentTreeItemContextMenuContribution } from './extensions/SysONDocumentTreeItemContextMenuContribution';
-import { SysONExtensionRegistryMergeStrategy } from './extensions/SysONExtensionRegistryMergeStrategy';
 import { SysONFooter } from './extensions/SysONFooter';
-// import { SysONNavigationBarIcon } from './extensions/SysONNavigationBarIcon';
-import { SysONObjectTreeItemContextMenuContribution } from './extensions/SysONObjectTreeItemContextMenuContribution';
-import './fonts.css';
-import './reset.css';
+import { SysONNavigationBarIcon } from './extensions/SysONNavigationBarIcon';
 import { sysonTheme } from './theme/sysonTheme';
+
+import './fonts.css';
+import './ReactFlow.css';
+import './reset.css';
 import './variables.css';
-import { useLayoutEffect } from 'react';
 
 if (process.env.NODE_ENV !== 'production') {
   loadDevMessages();
@@ -77,21 +80,10 @@ if (process.env.NODE_ENV !== 'production') {
 
 const extensionRegistry: ExtensionRegistry = new ExtensionRegistry();
 
-function RemoveHeader() {
-  useLayoutEffect(() => {
-    const header = document.getElementsByTagName('header')[0];
-    if (header && header.classList.contains('MuiAppBar-root')) {
-      header.parentNode?.removeChild(header);
-    }
-  });
-  return <div />;
-}
-
 extensionRegistry.addComponent(navigationBarIconExtensionPoint, {
   identifier: `syson_${navigationBarIconExtensionPoint.identifier}`,
-  Component: RemoveHeader,
+  Component: SysONNavigationBarIcon,
 });
-
 extensionRegistry.putData(navigationBarMenuHelpURLExtensionPoint, {
   identifier: `syson_${navigationBarMenuHelpURLExtensionPoint.identifier}`,
   data: 'https://doc.mbse-syson.org',
@@ -160,8 +152,7 @@ extensionRegistry.addComponent(footerExtensionPoint, {
 
 extensionRegistry.addComponent(navigationBarMenuIconExtensionPoint, {
   identifier: `syson_${navigationBarMenuIconExtensionPoint.identifier}`,
-  Component: () => <div />,
-  // Component: SysONNavigationBarMenuIcon,
+  Component: SysONNavigationBarMenuIcon,
 });
 
 const treeItemContextMenuOverrideContributions: TreeItemContextMenuOverrideContribution[] = [
