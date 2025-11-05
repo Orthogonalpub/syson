@@ -39,18 +39,18 @@
   <servers>
     <server>
       <id>github-sirius-web</id>
-      <username>${env.USERNAME}</username>
-      <password>${env.PASSWORD}</password>
+      <username>orthogonalpub</username>
+      <password></password>
     </server>
     <server>
       <id>github-sirius-emfjson</id>
-      <username>${env.USERNAME}</username>
-      <password>${env.PASSWORD}</password>
+      <username>orthogonalpub</username>
+      <password></password>
     </server>
     <server>
       <id>github</id>
-      <username>${env.USERNAME}</username>
-      <password>${env.PASSWORD}</password>
+      <username>orthogonalpub</username>
+      <password></password>
     </server>
   </servers>
 </settings>
