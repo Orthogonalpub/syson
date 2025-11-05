@@ -87,7 +87,11 @@ function RemoveHeader() {
       const container = header.parentNode;
       if (container) {
         container.removeChild(header);
-        if ("className" in container && typeof container.className === "string" && container.className.includes("navbar")) {
+        if (
+          'className' in container &&
+          typeof container.className === 'string' &&
+          container.className.includes('navbar')
+        ) {
           container.parentNode?.removeChild(container);
         }
       }
