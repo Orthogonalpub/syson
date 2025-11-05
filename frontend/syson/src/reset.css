@@ -216,3 +216,7 @@ button::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
+
+[data-testid="sidebar-left"] {
+  padding-top: 36.57px; /* for back home logo space */
+}
