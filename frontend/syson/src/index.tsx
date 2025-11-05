@@ -63,12 +63,12 @@ import { SysONDocumentTreeItemContextMenuContribution } from './extensions/SysON
 import { SysONExtensionRegistryMergeStrategy } from './extensions/SysONExtensionRegistryMergeStrategy';
 import { SysONFooter } from './extensions/SysONFooter';
 // import { SysONNavigationBarIcon } from './extensions/SysONNavigationBarIcon';
+import { useLayoutEffect } from 'react';
 import { SysONObjectTreeItemContextMenuContribution } from './extensions/SysONObjectTreeItemContextMenuContribution';
 import './fonts.css';
 import './reset.css';
 import { sysonTheme } from './theme/sysonTheme';
 import './variables.css';
-import { useLayoutEffect } from 'react';
 
 if (process.env.NODE_ENV !== 'production') {
   loadDevMessages();
@@ -77,11 +77,20 @@ if (process.env.NODE_ENV !== 'production') {
 
 const extensionRegistry: ExtensionRegistry = new ExtensionRegistry();
 
+/**
+ * @description SysON doesn't support to replace the whole navbar, but the inner elements like navigationBarIconExtensionPoint | navigationBarLeftContributionExtensionPoint | ...
+ */
 function RemoveHeader() {
   useLayoutEffect(() => {
     const header = document.getElementsByTagName('header')[0];
     if (header && header.classList.contains('MuiAppBar-root')) {
-      header.parentNode?.removeChild(header);
+      const container = header.parentNode;
+      if (container) {
+        container.removeChild(header);
+        if ("className" in container && typeof container.className === "string" && container.className.includes("navbar")) {
+          container.parentNode?.removeChild(container);
+        }
+      }
     }
   });
   return <div />;
