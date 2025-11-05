@@ -86,14 +86,10 @@ function RemoveHeader() {
     if (header && header.classList.contains('MuiAppBar-root')) {
       const container = header.parentNode;
       if (container) {
-        container.removeChild(header);
-        if (
-          'className' in container &&
-          typeof container.className === 'string' &&
-          container.className.includes('navbar')
-        ) {
-          container.parentNode?.removeChild(container);
-        }
+        // should keep container to avoid layout broken
+        container.childNodes.forEach((el) => {
+          container.removeChild(el);
+        });
       }
     }
   });
