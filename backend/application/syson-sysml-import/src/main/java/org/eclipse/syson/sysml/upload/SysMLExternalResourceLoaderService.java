@@ -63,8 +63,26 @@ public class SysMLExternalResourceLoaderService implements IExternalResourceLoad
             this.logger.warn(exception.getMessage(), exception);
             canHandle = false;
         }
+
         if (canHandle) {
-            canHandle = resourceURI != null && (resourceURI.toString().toLowerCase().endsWith(".sysml") || resourceURI.toString().toLowerCase().endsWith(".kerml"));
+            //canHandle = resourceURI != null && (resourceURI.toString().toLowerCase().endsWith(".sysml") || resourceURI.toString().toLowerCase().endsWith(".kerml"));
+
+            if (resourceURI != null) {
+                String uriString = resourceURI.toString();
+                int dotIndex = uriString.lastIndexOf('.');
+    
+                if (dotIndex != -1 && dotIndex < uriString.length() - 1) {
+                    String suffix = uriString.substring(dotIndex + 1).toLowerCase();
+                    canHandle = suffix.equals("sysml"); // 只允许 sysml 后缀
+                } else {
+                    canHandle = true; 
+                }
+            }
+            else{
+                    canHandle = false; 
+            }
+
+
         }
         return canHandle;
     }
